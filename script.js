@@ -1,12 +1,13 @@
-//your JS code here. If required.
-const usernameInput = document.getElementById("username");
+const form = document.getElementById("loginForm");
+    const usernameInput = document.getElementById("username");
     const passwordInput = document.getElementById("password");
     const checkbox = document.getElementById("checkbox");
-    const submitBtn = document.getElementById("submit");
     const existingBtn = document.getElementById("existing");
-    const form = document.getElementById("loginForm");
 
-    // Check if credentials already exist on page load
+    // 🔹 ALWAYS start with existing button hidden (Cypress-safe)
+    existingBtn.style.display = "none";
+
+    // 🔹 Check localStorage AFTER ensuring clean visibility state
     const savedUsername = localStorage.getItem("username");
     const savedPassword = localStorage.getItem("password");
 
@@ -14,7 +15,7 @@ const usernameInput = document.getElementById("username");
       existingBtn.style.display = "inline-block";
     }
 
-    // Handle form submission
+    // 🔹 Handle form submission
     form.addEventListener("submit", function (e) {
       e.preventDefault();
 
@@ -34,7 +35,7 @@ const usernameInput = document.getElementById("username");
       }
     });
 
-    // Handle existing user login
+    // 🔹 Handle existing user login
     existingBtn.addEventListener("click", function () {
       const savedUsername = localStorage.getItem("username");
       alert(`Logged in as ${savedUsername}`);
