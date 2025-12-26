@@ -1,20 +1,12 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-	<style>
-    #existing {
-      display: none;
-    }
-  </style>
-
-	<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <title>Login Form</title>
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-	<h1>Login Form</h1>
+
+  <h1>Login Form</h1>
 
   <form id="loginForm">
     <input
@@ -22,18 +14,18 @@
       id="username"
       placeholder="Username"
     />
-    <br /><br />
+    <br><br>
 
     <input
       type="password"
       id="password"
       placeholder="Password"
     />
-    <br /><br />
+    <br><br>
 
-    <input type="checkbox" id="checkbox" />
+    <input type="checkbox" id="checkbox">
     <label for="checkbox">Remember me.</label>
-    <br /><br />
+    <br><br>
 
     <input
       type="submit"
@@ -42,12 +34,50 @@
     />
   </form>
 
-  <br />
+  <br>
 
-  <button id="existing">Login as existing user</button>
-    <script type="text/javascript" src="./script.js">
-</script>
+  <!-- Existing user button hidden by default -->
+  <button id="existing" hidden>Login as existing user</button>
+
+  <script>
+    const form = document.getElementById("loginForm");
+    const usernameInput = document.getElementById("username");
+    const passwordInput = document.getElementById("password");
+    const checkbox = document.getElementById("checkbox");
+    const existingBtn = document.getElementById("existing");
+
+    // 🔹 On page load: decide visibility
+    const savedUsername = localStorage.getItem("username");
+    const savedPassword = localStorage.getItem("password");
+
+    if (savedUsername && savedPassword) {
+      existingBtn.hidden = false;
+    } else {
+      existingBtn.hidden = true;
+    }
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const username = usernameInput.value;
+      const password = passwordInput.value;
+
+      alert(`Logged in as ${username}`);
+
+      if (checkbox.checked) {
+        localStorage.setItem("username", username);
+        localStorage.setItem("password", password);
+        existingBtn.hidden = false;
+      } else {
+        localStorage.removeItem("username");
+        localStorage.removeItem("password");
+        existingBtn.hidden = true;
+      }
+    });
+    existingBtn.addEventListener("click", function () {
+      const savedUsername = localStorage.getItem("username");
+      alert(`Logged in as ${savedUsername}`);
+    });
+  </script>
 
 </body>
-
 </html>
