@@ -6,42 +6,47 @@
 </head>
 <body>
 
+  <!-- Heading -->
   <h1>Login Form</h1>
 
+  <!-- Login Form -->
   <form id="loginForm">
 
-  <label for="username">Username:</label>
-<input
-  type="text"
-  id="username"
-  placeholder="Username"
-/>
+    <!-- Username -->
+    <label for="username">Username:</label>
+    <input
+      type="text"
+      id="username"
+      placeholder="Username"
+    />
+    <br><br>
 
-<br><br>
+    <!-- Password -->
+    <label for="password">Password:</label>
+    <input
+      type="password"
+      id="password"
+      placeholder="Password"
+    />
+    <br><br>
 
-<label for="password">Password:</label>
-<input
-  type="password"
-  id="password"
-  placeholder="Password"
-/>
-  <br><br>
+    <!-- Remember Me -->
+    <input type="checkbox" id="checkbox">
+    <label for="checkbox">Remember me:</label>
+    <br><br>
 
-  <input type="checkbox" id="checkbox">
-  <label for="checkbox">Remember me.</label>
-  <br><br>
+    <!-- Submit -->
+    <input
+      type="submit"
+      id="submit"
+      value="Submit"
+    />
 
-  <input
-    type="submit"
-    id="submit"
-    value="Submit"
-  />
-
-</form>
+  </form>
 
   <br>
 
-  <!-- Existing user button hidden by default -->
+  <!-- Existing User Button -->
   <button id="existing" hidden>Login as existing user</button>
 
   <script>
@@ -51,15 +56,15 @@
     const checkbox = document.getElementById("checkbox");
     const existingBtn = document.getElementById("existing");
 
-    // 🔹 On page load: decide visibility
+    // On page load: check localStorage
     const savedUsername = localStorage.getItem("username");
     const savedPassword = localStorage.getItem("password");
 
     if (savedUsername && savedPassword) {
       existingBtn.hidden = false;
-    } else {
-      existingBtn.hidden = true;
     }
+
+    // Form submit handler
     form.addEventListener("submit", function (e) {
       e.preventDefault();
 
@@ -78,6 +83,8 @@
         existingBtn.hidden = true;
       }
     });
+
+    // Existing user login
     existingBtn.addEventListener("click", function () {
       const savedUsername = localStorage.getItem("username");
       alert(`Logged in as ${savedUsername}`);
